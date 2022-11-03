@@ -24,6 +24,14 @@ const cube = new THREE.Mesh( cubeGeometry, cubeMaterial )
 // cube.position.set( 5, 0, 0 )
 // cube.position.x = 3
 
+// 6、缩放
+// cube.scale.set( 3, 2, 1 )
+// cube.scale.x = 2
+
+// 7、旋转
+// cube.rotation.set( Math.PI / 4, 0, 0 )
+// cube.rotation.x = Math.PI / 4
+
 // 将几何体添加到场景中
 scene.add(cube)
 
@@ -48,10 +56,10 @@ scene.add( axesHelper )
 
 // 请求下一帧
 function render() {
-  cube.position.x += 0.01
-  if ( cube.position.x > 5 ) {
-    cube.position.x = 0
-  }
+  // cube.position.x += 0.01
+  // if ( cube.position.x > 5 ) {
+  //   cube.position.x = 0
+  // }
   renderer.render( scene, camera )
   // 下一帧渲染
   requestAnimationFrame( render )
