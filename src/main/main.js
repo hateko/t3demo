@@ -19,6 +19,11 @@ const cubeMaterial = new THREE.MeshBasicMaterial({ color: 0xffff00 })
 
 // 根据几何体材质创建物体
 const cube = new THREE.Mesh( cubeGeometry, cubeMaterial ) 
+
+// 5、修改物体位置
+// cube.position.set( 5, 0, 0 )
+// cube.position.x = 3
+
 // 将几何体添加到场景中
 scene.add(cube)
 
@@ -39,11 +44,14 @@ const controls = new OrbitControls( camera, renderer.domElement )
 
 // 4、添加坐标轴辅助器
 const axesHelper = new THREE.AxesHelper( 5 )
-
 scene.add( axesHelper )
 
 // 请求下一帧
 function render() {
+  cube.position.x += 0.01
+  if ( cube.position.x > 5 ) {
+    cube.position.x = 0
+  }
   renderer.render( scene, camera )
   // 下一帧渲染
   requestAnimationFrame( render )
