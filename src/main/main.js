@@ -54,12 +54,25 @@ const controls = new OrbitControls( camera, renderer.domElement )
 const axesHelper = new THREE.AxesHelper( 5 )
 scene.add( axesHelper )
 
+// 9、设置时钟
+const clock = new THREE.Clock()
+
 // 请求下一帧
 function render() {
   // cube.position.x += 0.01
   // if ( cube.position.x > 5 ) {
   //   cube.position.x = 0
   // }
+
+  // 8、增加动画帧
+  // let t = time / 1000 % 5
+  // cube.position.x = t * 1
+  // 获取时钟运行总时长
+  // let time = clock.getElapsedTime() 
+  // let deltaTime = clock.getDelta()  
+  // console.log("总时长：", time)
+  // console.log("时间间隔：", deltaTime )
+
   renderer.render( scene, camera )
   // 下一帧渲染
   requestAnimationFrame( render )
