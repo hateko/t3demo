@@ -51,6 +51,8 @@ renderer.render( scene, camera )
 
 // 3、创建轨道控制器
 const controls = new OrbitControls( camera, renderer.domElement )
+// 设置控制器阻尼，在动画循环里要调用update
+controls.enableDamping = true
 
 // 4、添加坐标轴辅助器
 const axesHelper = new THREE.AxesHelper( 5 )
@@ -75,7 +77,7 @@ gsap.to( cube.rotation, {
   repeat: 2,
 } )
 window.addEventListener( 'dblclick', () => {
-  if( animate.isActive() ) {
+  if( animate.isActive()  ) {
     animate.pause()
   }else {
     animate.resume()
@@ -98,10 +100,24 @@ function render() {
   // let deltaTime = clock.getDelta()  
   // console.log("总时长：", time)
   // console.log("时间间隔：", deltaTime )
-
+  controls.update()
   renderer.render( scene, camera )
   // 下一帧渲染
   requestAnimationFrame( render )
 }
 
 render() 
+
+
+// 监听画面变化，更新渲染画面
+window.addEventListener( 'resize', () => {
+  // console.log('画面变化了')
+  // 更新摄像头
+  camera.aspect = window.innerWidth / window.innerHeight
+  // 更新摄像机投影矩阵
+  camera.updateProjectionMatrix()
+  // 更新渲染器
+  renderer.setSize(window.innerWidth, window.innerHeight)
+  // 设置渲染器像素比
+  renderer.setPixelRatio(window.devicePixelRatio)
+} )
