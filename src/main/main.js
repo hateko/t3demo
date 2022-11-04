@@ -18,19 +18,44 @@ const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.inner
 camera.position.set( 0, 0, 10 )
 scene.add( camera )
 
+// 导入纹理
+const textureLoader = new THREE.TextureLoader()
+const doorTexture = textureLoader.load('./door.jpg')
+
+// doorTexture.offset.x = 0.1
+doorTexture.center.set( 0.5, 0.5 )
+// doorTexture.rotation = Math.PI / 4
+// 设置纹理重复及重复模式
+// doorTexture.repeat.set( 2, 3 )
+// doorTexture.wrapS = THREE.RepeatWrapping
+// doorTexture.wrapT = THREE.MirroredRepeatWrapping
+ 
+// 纹理显示设置
+doorTexture.minFilter = THREE.NearestFilter
+doorTexture.magFilter = THREE.NearestFilter
+doorTexture.minFilter = THREE.LinearFilter
+doorTexture.magFilter = THREE.LinearFilter
+
+
 // 添加物体
 // 创建几何体
-// const cubeGeometry = new THREE.BoxGeometry()
-// const cubeMaterial = new THREE.MeshBasicMaterial({ color: 0xffff00 })
+const cubeGeometry = new THREE.BoxGeometry()
+const cubeMaterial = new THREE.MeshBasicMaterial({
+  color: '#ffff00',
+  map: doorTexture,
+  alphaMap: doorTexture,
+  transparent: true,
+})
 
-const cubeArray = buffer()
-cubeArray.map( cube => {
-  scene.add(cube)
-} )
-const cube = cubeArray[0]
+// 随机三角
+// const cubeArray = buffer()
+// cubeArray.map( cube => {
+//   scene.add(cube)
+// } )
+// const cube = cubeArray[0]
 
 // 根据几何体材质创建物体
-// const cube = new THREE.Mesh( cubeGeometry, cubeMaterial ) 
+const cube = new THREE.Mesh( cubeGeometry, cubeMaterial ) 
 
 // 5、修改物体位置
 // cube.position.set( 5, 0, 0 )
