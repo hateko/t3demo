@@ -6,6 +6,8 @@ import gsap from 'gsap'
 
 import * as dat from 'dat.gui'
 
+import buffer from './buffer'
+
 // 1、创建场景
 const scene = new THREE.Scene()
 
@@ -18,11 +20,14 @@ scene.add( camera )
 
 // 添加物体
 // 创建几何体
-const cubeGeometry = new THREE.BoxGeometry()
-const cubeMaterial = new THREE.MeshBasicMaterial({ color: 0xffff00 })
+// const cubeGeometry = new THREE.BoxGeometry()
+// const cubeMaterial = new THREE.MeshBasicMaterial({ color: 0xffff00 })
+
+const cube = buffer()
+console.log(cube)
 
 // 根据几何体材质创建物体
-const cube = new THREE.Mesh( cubeGeometry, cubeMaterial ) 
+// const cube = new THREE.Mesh( cubeGeometry, cubeMaterial ) 
 
 // 5、修改物体位置
 // cube.position.set( 5, 0, 0 )
