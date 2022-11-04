@@ -62,28 +62,28 @@ scene.add( axesHelper )
 // const clock = new THREE.Clock()
 
 // 10、设置动画
-const animate = gsap.to( cube.position, { 
-  x: 5,
-  duration: 5,
-  ease: "power1.inOut",
-  yoyo: true, // 往返运动
-  delay: 2, // 延迟2秒
-  onComplete: () => {}
-} ) 
-gsap.to( cube.rotation, { 
-  x: 2 * Math.PI,
-  duration: 5,
-  // 无限循环是-1
-  repeat: 2,
-} )
-window.addEventListener( 'dblclick', () => {
-  if( animate.isActive()  ) {
-    animate.pause()
-  }else {
-    animate.resume()
-  }
+// const animate = gsap.to( cube.position, { 
+//   x: 5,
+//   duration: 5,
+//   ease: "power1.inOut",
+//   yoyo: true, // 往返运动
+//   delay: 2, // 延迟2秒
+//   onComplete: () => {}
+// } ) 
+// gsap.to( cube.rotation, { 
+//   x: 2 * Math.PI,
+//   duration: 5,
+//   // 无限循环是-1
+//   repeat: 2,
+// } )
+// window.addEventListener( 'dblclick', () => {
+//   if( animate.isActive()  ) {
+//     animate.pause()
+//   }else {
+//     animate.resume()
+//   }
   
-} )
+// } )
 
 // 请求下一帧
 function render() {
@@ -120,4 +120,15 @@ window.addEventListener( 'resize', () => {
   renderer.setSize(window.innerWidth, window.innerHeight)
   // 设置渲染器像素比
   renderer.setPixelRatio(window.devicePixelRatio)
+} )
+
+// js控制画面全屏
+window.addEventListener( 'dblclick', () => {
+  // 双击进入、退出全屏
+  const fullScreen = document.fullscreenElement
+  if ( fullScreen ) {
+    document.exitFullscreen()
+  }else {
+    renderer.domElement.requestFullscreen()
+  }
 } )
