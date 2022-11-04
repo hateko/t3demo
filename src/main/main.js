@@ -4,6 +4,8 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
 import gsap from 'gsap'
 
+import * as dat from 'dat.gui'
+
 // 1、创建场景
 const scene = new THREE.Scene()
 
@@ -123,12 +125,46 @@ window.addEventListener( 'resize', () => {
 } )
 
 // js控制画面全屏
-window.addEventListener( 'dblclick', () => {
-  // 双击进入、退出全屏
-  const fullScreen = document.fullscreenElement
-  if ( fullScreen ) {
-    document.exitFullscreen()
-  }else {
-    renderer.domElement.requestFullscreen()
+// window.addEventListener( 'dblclick', () => {
+//   // 双击进入、退出全屏
+//   const fullScreen = document.fullscreenElement
+//   if ( fullScreen ) {
+//     document.exitFullscreen()
+//   }else {
+//     renderer.domElement.requestFullscreen()
+//   }
+// } )
+
+// 创建gui
+const gui = new dat.GUI()
+gui.add( cube.position, 'x' )
+  .min(0)
+  .max(5)
+  .step(0.1)
+  .name('移动x轴坐标')
+  .onChange(( value ) => {
+    console.log(value)
+  })
+  .onFinishChange(( value ) => {
+    console.log('finish', value)
+  })
+// 修改颜色
+const params = {
+  color: "#ffff00",
+  fn: () => {
+    gsap.to(cube.position, { x: 5, duration: 2, yoyo: true, repeat: true})
   }
-} )
+}
+gui.addColor( params, "color" )
+  .onChange(( value ) => {
+    cube.material.color.set(value)
+  })
+// 设置选项框
+gui.add(cube, 'visible').name("是否显示")
+
+
+ 
+const folder = gui.addFolder("设置物体")
+// 设置线框
+folder.add(cube.material, 'wireframe')
+folder.add(params, 'fn').name("物体运动")
