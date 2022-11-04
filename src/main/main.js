@@ -23,8 +23,11 @@ scene.add( camera )
 // const cubeGeometry = new THREE.BoxGeometry()
 // const cubeMaterial = new THREE.MeshBasicMaterial({ color: 0xffff00 })
 
-const cube = buffer()
-console.log(cube)
+const cubeArray = buffer()
+cubeArray.map( cube => {
+  scene.add(cube)
+} )
+const cube = cubeArray[0]
 
 // 根据几何体材质创建物体
 // const cube = new THREE.Mesh( cubeGeometry, cubeMaterial ) 
