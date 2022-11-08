@@ -22,13 +22,19 @@ export default () => {
     fragmentShader: rawFragmentShader, // 片元
     wireframe: true,
     side: THREE.DoubleSide,
+    uniforms: {
+      u_time: { value: 0 }
+    }
   })
   const geometry = new THREE.PlaneBufferGeometry( 1, 1, 64, 64 )
-  const floor = new THREE.Mesh(
+  const plane = new THREE.Mesh(
     geometry,
     rawShaderMaterial
   ) 
 
-  return floor
+  return {
+    plane,
+    rawShaderMaterial
+  }
 }
 

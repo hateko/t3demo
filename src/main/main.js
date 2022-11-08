@@ -71,7 +71,7 @@ const cube = new THREE.Mesh( cubeGeometry, cubeMaterial )
 // cube.rotation.x = Math.PI / 4
 
 // 将几何体添加到场景中
-const plane = shader()
+const { plane, rawShaderMaterial } = shader()
 scene.add(plane)
 // scene.add(cube)
 
@@ -97,7 +97,7 @@ const axesHelper = new THREE.AxesHelper( 5 )
 scene.add( axesHelper )
 
 // 9、设置时钟
-// const clock = new THREE.Clock()
+const clock = new THREE.Clock()
 
 // 10、设置动画
 // const animate = gsap.to( cube.position, { 
@@ -134,7 +134,8 @@ function render() {
   // let t = time / 1000 % 5
   // cube.position.x = t * 1
   // 获取时钟运行总时长
-  // let time = clock.getElapsedTime() 
+  let time = clock.getElapsedTime() 
+  rawShaderMaterial.uniforms.u_time.value = time
   // let deltaTime = clock.getDelta()  
   // console.log("总时长：", time)
   // console.log("时间间隔：", deltaTime )

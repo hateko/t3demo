@@ -9,6 +9,8 @@ uniform mat4 modelMatrix;
 uniform mat4 viewMatrix;
 uniform mat4 projectionMatrix;
 
+uniform float u_time;
+
 // 传给片元着色器使用变量
 varying vec2 v_uv;
 
@@ -22,7 +24,8 @@ void main() {
   v_uv = uv;
   vec4 modelPosition = modelMatrix * vec4( position, 1.0 );
   modelPosition.x += 1.0;
-  modelPosition.z = sin(modelPosition.x * 10.0);
+  modelPosition.z = sin((modelPosition.x + u_time) * 10.0) * 0.05;
+  modelPosition.z = sin((modelPosition.y + u_time) * 10.0) * 0.05;
 
   v_elevation = modelPosition.z;
   
