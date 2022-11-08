@@ -7,6 +7,7 @@ import gsap from 'gsap'
 import * as dat from 'dat.gui'
 
 import buffer from './buffer'
+import shader from './shader'
 
 // 1、创建场景
 const scene = new THREE.Scene()
@@ -70,7 +71,9 @@ const cube = new THREE.Mesh( cubeGeometry, cubeMaterial )
 // cube.rotation.x = Math.PI / 4
 
 // 将几何体添加到场景中
-scene.add(cube)
+const plane = shader()
+scene.add(plane)
+// scene.add(cube)
 
 // 初始化渲染器
 const renderer = new THREE.WebGLRenderer();
