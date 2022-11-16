@@ -1,4 +1,6 @@
 import * as THREE from 'three'
+import Stats from 'three/examples/jsm/libs/stats.module.js';
+import { GUI } from 'three/examples/jsm/libs/lil-gui.module.min.js';
 
 export default () => {
   console.log('l 01')
@@ -75,5 +77,41 @@ export default () => {
   camera.lookAt(scene.position)
 
   document.body.appendChild( renderer.domElement )
-  renderer.render(scene, camera)
+  // renderer.render(scene, camera)
+
+  // 帧频辅助器
+  const stats = new Stats();
+  stats.setMode(0);
+  document.body.appendChild( stats.dom );
+
+  // GUI
+  const controls = {
+    rotationSpeed: 0.02,
+    bouncingSpeed: 0.03,
+  }
+  const gui = new GUI();
+  gui.add(controls, 'rotationSpeed', 0, 0.5)
+  gui.add(controls, 'bouncingSpeed', 0, 0.5)
+
+  let step = 0;
+
+  function render() {
+
+    cube.rotation.x += controls.rotationSpeed;
+    cube.rotation.y += controls.rotationSpeed;
+    cube.rotation.z += controls.rotationSpeed;
+
+    step += controls.bouncingSpeed;
+    sphere.position.x = 20 + (10 * (Math.cos(step)));
+    sphere.position.y = 2 + (10*Math.abs(Math.sin(step)));
+
+
+    requestAnimationFrame(render);
+    stats.update();
+    renderer.render(scene, camera)
+    // stats.end();
+  }
+
+  render()
+
 }
