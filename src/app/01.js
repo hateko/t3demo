@@ -1,6 +1,7 @@
 import * as THREE from 'three'
 import Stats from 'three/examples/jsm/libs/stats.module.js';
 import { GUI } from 'three/examples/jsm/libs/lil-gui.module.min.js';
+import { AsciiEffect } from 'three/examples/jsm/effects/AsciiEffect.js';
 
 export default () => {
   console.log('l 01')
@@ -76,8 +77,11 @@ export default () => {
   camera.position.z = 30;
   camera.lookAt(scene.position)
 
-  document.body.appendChild( renderer.domElement )
-  // renderer.render(scene, camera)
+  const effect = new AsciiEffect(renderer)
+  effect.setSize(window.innerWidth, window.innerHeight)
+  document.body.appendChild( effect.domElement )
+
+  
 
   // 帧频辅助器
   const stats = new Stats();
@@ -108,7 +112,7 @@ export default () => {
 
     requestAnimationFrame(render);
     stats.update();
-    renderer.render(scene, camera)
+    effect.render(scene, camera)
     // stats.end();
   }
 
