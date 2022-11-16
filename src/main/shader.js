@@ -16,6 +16,9 @@ export default () => {
     vertexShader: basicVertexShader, //顶点
     fragmentShader: basicFragmentShader, // 片元
   })
+
+  const textureLoader = new THREE.TextureLoader();
+  const texture = textureLoader.load('../../dist/door.jpg')
  
   const rawShaderMaterial = new THREE.RawShaderMaterial({      
     vertexShader: rawVertexShader, //顶点
@@ -23,7 +26,8 @@ export default () => {
     wireframe: true,
     side: THREE.DoubleSide,
     uniforms: {
-      u_time: { value: 0 }
+      u_time: { value: 0 },
+      u_texture: { value: texture },
     }
   })
   const geometry = new THREE.PlaneBufferGeometry( 1, 1, 64, 64 )
